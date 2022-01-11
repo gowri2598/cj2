@@ -27,7 +27,7 @@ public class Main {
         	email = new Email();
         	emailJob.setEmail(email);
         	
-        	sms = new Sms();
+        	sms = new Sms();    
         	smsJob.setSms(sms);
         	
         	fileIO = new FileIO();
