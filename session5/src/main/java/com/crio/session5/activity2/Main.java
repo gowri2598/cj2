@@ -1,17 +1,16 @@
 package com.crio.session5.activity2;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
-    List<String> fileList = new ArrayList<>();
-    fileList.add("Sample1.pptx");
-    fileList.add("Sample2.pptx");
-    Compressor ctx = new Compressor();
-    //we could assume context is already set by preferences
-    ctx.setCompressionStrategy(new ZipCompressionStrategy());
-    //get a list of files...
-    ctx.createArchive(fileList);
-    }
+        StockTrade abcStock = new StockTrade();
+  
+        BuyStockCommand buyStockOrder = new BuyStockCommand(abcStock, "OLECTRA", 20);
+        SellStockCommand sellStockOrder = new SellStockCommand(abcStock,"OLECTRA", 20);
+  
+        Agent broker = new Agent();
+        broker.placeOrder(buyStockOrder);
+        broker.placeOrder(sellStockOrder);
+  
+        broker.processOrders();
+     }
 }

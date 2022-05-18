@@ -1,48 +1,47 @@
 package com.crio.session5.activity1;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-        List<Student> studentList = new ArrayList<Student>();
-
-        studentList.add(new Student(1, "Aditya", "Sharma"));
-        studentList.add(new Student(2, "Beena", "Mishra"));
-        studentList.add(new Student(3, "Priyanka", "Pandey"));
-        studentList.add(new Student(4, "Vikas", "Jain"));
-        studentList.add(new Student(5, "Rose", "Marlo"));
-
-        Comparator<Student> comparasionStrategy = new Comparator<Student>() {
-
-              @Override
-              public int compare(Student arg0, Student arg1) {
-
-                    return arg0.getFname().compareTo(arg1.getFname());
-
-              }
-        };
- 
-        Collections.sort(studentList,comparasionStrategy);
-       
-        for (Student student : studentList) {
-              System.err.println(student.toString());
-        }
-       
-        Collections.sort(studentList, new Comparator<Student>() {
-
-              @Override
-              public int compare(Student arg0, Student arg1) {
-                    return arg1.getRollNo() - arg0.getRollNo();
-              }
-
-        });
-        System.out.println();
-
-        for (Student student : studentList) {
-              System.out.println(student.toString());
-        }
+	public static void main(String[] args)
+    {
+        init();
     }
+ 
+    private static void init()
+    {
+        ThreadPool pool = new ThreadPool(10);
+        
+        Email email = null;
+        EmailJob  emailJob = new EmailJob();
+        
+        Sms sms = null;
+        SmsJob smsJob = new SmsJob();
+        
+        FileIO fileIO = null;
+        FileIOJob fileIOJob = new FileIOJob();
+        
+        Logging logging = null;;
+        LoggingJob logJob = new LoggingJob();
+        
+        for (int i = 0; i < 5; i++) {
+        	email = new Email();
+        	emailJob.setEmail(email);
+        	
+        	sms = new Sms();    
+        	smsJob.setSms(sms);
+        	
+        	fileIO = new FileIO();
+        	fileIOJob.setFileIO(fileIO);
+        	
+        	logging = new Logging();
+        	logJob.setLogging(logging);
+        	
+            pool.addJob(emailJob);
+            pool.addJob(smsJob);
+            pool.addJob(fileIOJob);
+            pool.addJob(logJob);
+        }
+        pool.shutdownPool();
+    }
+
 }
