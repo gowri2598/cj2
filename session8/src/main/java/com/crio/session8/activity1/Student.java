@@ -1,4 +1,4 @@
-package main.java.com.crio.session2.activity1;
+package main.java.com.crio.session8.activity1;
 
 
 public class Student {
